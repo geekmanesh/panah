@@ -22,6 +22,7 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql+asyncpg://panah:panah@db:5432/panah
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-me}
     ports:
       - "8000:8000"
     depends_on:
