@@ -16,6 +16,9 @@ cd backend
 # Install dependencies (creates .venv, resolves against uv.lock)
 uv sync
 
+# Copy env template and fill in real values before running anything (see "Secrets" below)
+cp .env.example .env
+
 # Run the dev server with autoreload (needs DATABASE_URL reachable, e.g. `docker compose up -d db`)
 uv run fastapi dev app/main.py
 
@@ -35,9 +38,18 @@ Full stack (Postgres + backend) via Docker, from the repo root:
 docker compose up -d --build
 ```
 
-The backend container's entrypoint (`backend/docker-entrypoint.sh`) runs `alembic upgrade head` before starting the server, so migrations are applied automatically on every container start. The compose Postgres is exposed on host port `5433` (not `5432`, to avoid clashing with a local Postgres install) — `backend/.env.example` and `app/config.py`'s defaults match this.
+The backend container's entrypoint (`backend/docker-entrypoint.sh`) runs `alembic upgrade head` before starting the server, so migrations are applied automatically on every container start. The compose Postgres is exposed on host port `5433` (not `5432`, to avoid clashing with a local Postgres install).
 
 There is no test suite, linter, or CI configuration yet — do not assume `pytest`, `ruff`, or similar are set up until you see them added.
+
+### Secrets
+
+Nothing secret is hardcoded — `app/config.py`'s `database_url` and `secret_key` have no defaults, so the app raises a `pydantic.ValidationError` and refuses to start if they're missing, in every environment. There are two separate `.env` files (both gitignored) because two separate things read them:
+
+- **`backend/.env`** (from `backend/.env.example`) — read by `pydantic-settings` (`app/config.py`) when running the backend directly with `uv run ...`. Sets `DATABASE_URL` and `SECRET_KEY` directly.
+- **`.env`** at the repo root (from `.env.example`) — read by `docker compose` for variable substitution in `docker-compose.yml`. Sets `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, and `SECRET_KEY`; `docker-compose.yml` builds `DATABASE_URL` from the `POSTGRES_*` vars so the credential lives in exactly one place.
+
+When adding a new secret, add it to both `.env.example` files (with a `change-me` placeholder, never a real value) and thread it through `docker-compose.yml`'s `environment:` block for the relevant service — don't hardcode it in a Dockerfile, compose file, or Python default.
 
 ## Architecture
 
