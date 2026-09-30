@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     """
-    Default custom user model for panah_backend.
+    Default custom user model for apps.
     If adding fields that need to be filled at user signup,
     check forms.SignupForm and forms.SocialSignupForms accordingly.
     """

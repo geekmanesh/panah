@@ -10,7 +10,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=_source
 set BUILDDIR=_build
-set APP=..\panah_backend
+set APP=..\apps
 
 if "%1" == "" goto help
 

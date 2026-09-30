@@ -1,4 +1,4 @@
-# Translations for the panah_backend project
+# Translations for the apps project
 # Copyright (C) 2026 Geekmanesh
 # Geekmanesh <info@geekmanesh.net>, 2026.
 #
