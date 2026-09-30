@@ -166,7 +166,7 @@ python_files = [
 
 # ==== Coverage ====
 [tool.coverage.run]
-include = [ "panah_backend/**" ]
+include = [ "apps/**" ]
 omit = [ "*/migrations/*", "*/tests/*" ]
 plugins = [ "django_coverage_plugin" ]
 

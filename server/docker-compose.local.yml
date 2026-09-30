@@ -1,7 +1,6 @@
 volumes:
   panah_backend_local_postgres_data: {}
   panah_backend_local_postgres_data_backups: {}
-  panah_backend_local_redis_data: {}
 
 services:
   django: &django
@@ -12,7 +11,6 @@ services:
     container_name: panah_backend_local_django
     depends_on:
       - postgres
-      - redis
     volumes:
       - /app/.venv
       - .:/app:z
@@ -38,36 +36,3 @@ services:
       - path: ./.envs/.local/.postgres
         required: false
 
-  redis:
-    image: docker.io/redis:7.2
-    container_name: panah_backend_local_redis
-    volumes:
-      - panah_backend_local_redis_data:/data
-
-  celeryworker:
-    <<: *django
-    image: panah_backend_local_celeryworker
-    container_name: panah_backend_local_celeryworker
-    depends_on:
-      - redis
-      - postgres
-    ports: []
-    command: /start-celeryworker
-
-  celerybeat:
-    <<: *django
-    image: panah_backend_local_celerybeat
-    container_name: panah_backend_local_celerybeat
-    depends_on:
-      - redis
-      - postgres
-    ports: []
-    command: /start-celerybeat
-
-  flower:
-    <<: *django
-    image: panah_backend_local_flower
-    container_name: panah_backend_local_flower
-    ports:
-      - '5555:5555'
-    command: /start-flower

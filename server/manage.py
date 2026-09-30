@@ -20,9 +20,9 @@ def main():
         ) from exc
 
     # This allows easy placement of apps within the interior
-    # panah_backend directory.
+    # apps directory.
     current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "panah_backend"))
+    sys.path.append(str(current_path / "apps"))
 
     execute_from_command_line(sys.argv)
 

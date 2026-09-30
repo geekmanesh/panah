@@ -10,7 +10,7 @@ from django.views.generic import DetailView
 from django.views.generic import RedirectView
 from django.views.generic import UpdateView
 
-from panah_backend.users.models import User
+from apps.users.models import User
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from panah_backend.users.models import User
+from apps.users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer[User]):

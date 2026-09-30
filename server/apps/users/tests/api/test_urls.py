@@ -6,7 +6,7 @@ from django.urls import resolve
 from django.urls import reverse
 
 if TYPE_CHECKING:
-    from panah_backend.users.models import User
+    from apps.users.models import User
 
 
 def test_user_detail(user: User):

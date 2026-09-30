@@ -28,7 +28,7 @@ django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = "panah_backend"
+project = "apps"
 copyright = """2026, Geekmanesh"""  # noqa: A001
 author = "Geekmanesh"
 

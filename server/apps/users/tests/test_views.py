@@ -14,16 +14,16 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from panah_backend.users.forms import UserAdminChangeForm
-from panah_backend.users.tests.factories import UserFactory
-from panah_backend.users.views import UserRedirectView
-from panah_backend.users.views import UserUpdateView
-from panah_backend.users.views import user_detail_view
+from apps.users.forms import UserAdminChangeForm
+from apps.users.tests.factories import UserFactory
+from apps.users.views import UserRedirectView
+from apps.users.views import UserUpdateView
+from apps.users.views import user_detail_view
 
 if TYPE_CHECKING:
     from django.test import RequestFactory
 
-    from panah_backend.users.models import User
+    from apps.users.models import User
 
 pytestmark = pytest.mark.django_db
 

@@ -6,10 +6,10 @@ from typing import TYPE_CHECKING
 
 from django.utils.translation import gettext_lazy as _
 
-from panah_backend.users.forms import UserAdminCreationForm
+from apps.users.forms import UserAdminCreationForm
 
 if TYPE_CHECKING:
-    from panah_backend.users.models import User
+    from apps.users.models import User
 
 
 class TestUserAdminCreationForm:

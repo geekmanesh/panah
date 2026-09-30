@@ -5,10 +5,10 @@ from typing import TYPE_CHECKING
 import pytest
 from rest_framework.test import APIRequestFactory
 
-from panah_backend.users.api.views import UserViewSet
+from apps.users.api.views import UserViewSet
 
 if TYPE_CHECKING:
-    from panah_backend.users.models import User
+    from apps.users.models import User
 
 
 class TestUserViewSet:
